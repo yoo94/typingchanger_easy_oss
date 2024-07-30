@@ -1,0 +1,22 @@
+{
+  "name": "fe2-typingchanger_easy",
+  "version": "1.0.0",
+  "description": "한영키로 언어를 안바꾸고 타이핑 했을때  한글=>영어, 영어=>한글 자동 변환 모듈",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoo94/fe2-typingchanger_easy.git"
+  },
+  "author": "yoo94 <ahy0119@naver.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yoo94/fe2-typingchanger_easy/issues"
+  },
+  "homepage": "https://github.com/yoo94/fe2-typingchanger_easy#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
