@@ -2,7 +2,7 @@
   "name": "fe2-typingchanger_easy",
   "version": "1.0.0",
   "description": "한영키로 언어를 안바꾸고 타이핑 했을때  한글=>영어, 영어=>한글 자동 변환 모듈",
-  "main": "index.js",
+  "main": "typingChanger_easy.js",
   "scripts": {
     "test": "jest"
   },
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/yoo94/fe2-typingchanger_easy#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.25.3",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0"
   }
 }
