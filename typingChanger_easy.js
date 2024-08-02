@@ -172,5 +172,40 @@ function isCorrectKoreanString(str) {
     return true;
 }
 
+// 변환 및 검증 함수
+function processText(text, priority = 'ko') {
+    // 한글 또는 한글 자모로 이루어진 경우
+    if (/^[가-힣ㄱ-ㅎㅏ-ㅣ\s]+$/.test(text)) {
+        // 올바른 한국어 문자열인지 확인
+        if (isCorrectKoreanString(text)) {
+            return text;
+        }
+        const convertedText = convertKoreanToEnglish(text);
+        // 유효한 영어 단어인지 확인
+        if (isValidEnglishWord(convertedText)) {
+            return convertedText;
+        }
+        // 우선순위에 따라 반환
+        return priority === 'ko' ? text : convertedText;
+    }
+
+    // 영어 알파벳으로만 이루어진 경우
+    if (/^[a-zA-Z\s]+$/.test(text)) {
+        // 유효한 영어 단어인지 확인
+        if (isValidEnglishWord(text)) {
+            return text;
+        }
+        const convertedText = convertEnglishToKorean(text);
+        // 올바른 한국어 문자열인지 확인
+        if (isCorrectKoreanString(convertedText)) {
+            return convertedText;
+        }
+        // 우선순위에 따라 반환
+        return priority === 'ko' ? convertedText : text;
+    }
+    // 위의 조건에 해당하지 않는 경우 원본 텍스트 반환
+    return text;
+}
+
 // 모듈 내보내기
-module.exports = { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isValidEnglishWord };
+module.exports = { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isValidEnglishWord, processText };
