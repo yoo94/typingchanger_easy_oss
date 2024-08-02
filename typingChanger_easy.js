@@ -6,6 +6,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+
 // 한국어 초성, 모음, 종성 리스트 정의
 const initialConsonants = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 const vowels = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
@@ -22,12 +23,11 @@ const koreanToEnglishMap = {
 };
 
 // 영어 문자와 한국어 문자의 매핑 정의
-var englishToKoreanMap = {};
-for (let koreanChar in koreanToEnglishMap) {
-    let englishChar = koreanToEnglishMap[koreanChar];
+const englishToKoreanMap = {};
+for (const koreanChar in koreanToEnglishMap) {
+    const englishChar = koreanToEnglishMap[koreanChar];
     englishToKoreanMap[englishChar] = koreanChar;
 }
-
 
 // 사전 데이터 로드
 const englishDictionary = new Set();
@@ -48,13 +48,13 @@ function isValidEnglishWord(word) {
 // 한글 자모 분리 함수
 function splitKoreanChar(koreanChar) {
     // baseCode: 유니코드 값에서 한글 시작 코드(0xAC00)를 뺀 값
-    var baseCode = koreanChar.charCodeAt(0) - 0xAC00;
+    const baseCode = koreanChar.charCodeAt(0) - 0xAC00;
     // initialIndex: 초성의 인덱스 계산
-    var initialIndex = Math.floor(baseCode / 588);
+    const initialIndex = Math.floor(baseCode / 588);
     // vowelIndex: 중성의 인덱스 계산
-    var vowelIndex = Math.floor((baseCode % 588) / 28);
+    const vowelIndex = Math.floor((baseCode % 588) / 28);
     // finalIndex: 종성의 인덱스 계산
-    var finalIndex = baseCode % 28;
+    const finalIndex = baseCode % 28;
 
     // 초성, 중성, 종성을 배열로 반환
     return [
@@ -66,9 +66,9 @@ function splitKoreanChar(koreanChar) {
 
 // 한글 문자열 자모 분리 함수
 function splitKoreanString(koreanString) {
-    var result = [];
-    for (var i = 0; i < koreanString.length; i++) {
-        var char = koreanString[i];
+    let result = [];
+    for (let i = 0; i < koreanString.length; i++) {
+        const char = koreanString[i];
         // 한글 문자인 경우 자모 분리
         if (char >= '가' && char <= '힣') {
             result = result.concat(splitKoreanChar(char));
@@ -83,7 +83,7 @@ function splitKoreanString(koreanString) {
 // 한글 -> 영어 변환 함수
 function convertKoreanToEnglish(text) {
     // 한글 문자열을 자모 단위로 분리
-    var splitText = splitKoreanString(text);
+    const splitText = splitKoreanString(text);
     // 각 자모를 영어로 변환하거나 그대로 반환하여 문자열로 결합
     return splitText.map(function(char) {
         return koreanToEnglishMap[char] || char;
@@ -92,11 +92,11 @@ function convertKoreanToEnglish(text) {
 
 // 영어 -> 한글 변환 함수
 function convertEnglishToKorean(text) {
-    var result = '';
-    var buffer = '';
+    let result = '';
+    let buffer = '';
 
-    for (var i = 0; i < text.length; i++) {
-        var char = text[i];
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
         buffer += char;
         if (englishToKoreanMap[buffer]) {
             result += englishToKoreanMap[buffer];
@@ -117,8 +117,8 @@ function convertEnglishToKorean(text) {
 
 // 자모 결합 함수
 function joinKoreanString(chars) {
-    var result = '';
-    var i = 0;
+    let result = '';
+    let i = 0;
 
     while (i < chars.length) {
         if (chars[i] === ' ') {
@@ -128,25 +128,25 @@ function joinKoreanString(chars) {
         }
 
         // 초성, 중성, 종성 추출
-        var initial = chars[i++];
-        var vowel = chars[i++];
-        var final = '';
+        const initial = chars[i++];
+        const vowel = chars[i++];
+        let final = '';
 
         // 종성이 있는지 확인하고 설정
-        var hasFinalConsonant = finalConsonants.includes(chars[i]);
-        var hasNextVowel = i + 1 < chars.length && vowels.includes(chars[i + 1]);
+        const hasFinalConsonant = finalConsonants.includes(chars[i]);
+        const hasNextVowel = i + 1 < chars.length && vowels.includes(chars[i + 1]);
 
         if (i < chars.length && hasFinalConsonant && !hasNextVowel) {
             final = chars[i++];
         }
 
-        var initialIndex = initialConsonants.indexOf(initial);
-        var vowelIndex = vowels.indexOf(vowel);
-        var finalIndex = finalConsonants.indexOf(final);
+        const initialIndex = initialConsonants.indexOf(initial);
+        const vowelIndex = vowels.indexOf(vowel);
+        const finalIndex = finalConsonants.indexOf(final);
 
         // 초성, 중성 인덱스가 유효한 경우 한글 문자로 결합
         if (initialIndex >= 0 && vowelIndex >= 0) {
-            var baseCode = 0xAC00 + (initialIndex * 588) + (vowelIndex * 28) + (finalIndex >= 0 ? finalIndex : 0);
+            const baseCode = 0xAC00 + (initialIndex * 588) + (vowelIndex * 28) + (finalIndex >= 0 ? finalIndex : 0);
             result += String.fromCharCode(baseCode);
         } else {
             result += initial + vowel + final;
@@ -157,7 +157,7 @@ function joinKoreanString(chars) {
 }
 
 function isCorrectKoreanString(str) {
-    for (let char of str) {
+    for (const char of str) {
         if (char >= '가' && char <= '힣') {
             const [initial, vowel, final] = splitKoreanChar(char);
             if (!initialConsonants.includes(initial) || !vowels.includes(vowel) || !finalConsonants.includes(final)) {
