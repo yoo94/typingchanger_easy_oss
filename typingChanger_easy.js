@@ -92,27 +92,32 @@ function convertKoreanToEnglish(text) {
 
 // 영어 -> 한글 변환 함수
 function convertEnglishToKorean(text) {
-    let result = '';
-    let buffer = '';
+    let result;
 
+    // 알파벳들을 한글 자모로 변환
+    let buffer = '';
     for (let i = 0; i < text.length; i++) {
         const char = text[i];
-        buffer += char;
-        if (englishToKoreanMap[buffer]) {
-            result += englishToKoreanMap[buffer];
-            buffer = '';
-        } else if (buffer.length > 1) {
-            result += buffer[0];
-            buffer = buffer.slice(1);
+        if (englishToKoreanMap[char]) {
+            buffer += englishToKoreanMap[char];
+        } else {
+            buffer += char;
         }
     }
 
-    // 남은 버퍼가 있으면 결과에 추가
-    if (buffer.length) {
-        result += buffer;
-    }
+    // 특정 모음 조합을 결합
+    buffer = buffer.replace(/ㅗㅏ/g, 'ㅘ')
+        .replace(/ㅗㅐ/g, 'ㅙ')
+        .replace(/ㅗㅣ/g, 'ㅚ')
+        .replace(/ㅜㅓ/g, 'ㅝ')
+        .replace(/ㅜㅔ/g, 'ㅞ')
+        .replace(/ㅜㅣ/g, 'ㅟ')
+        .replace(/ㅡㅣ/g, 'ㅢ');
 
-    return joinKoreanString(result.split(''));
+    // 결과를 joinKoreanString으로 보냄
+    result = joinKoreanString(buffer.split(''));
+
+    return result;
 }
 
 // 자모 결합 함수
