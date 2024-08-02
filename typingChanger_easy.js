@@ -138,5 +138,21 @@ function joinKoreanString(chars) {
     return result;
 }
 
+function isCorrectKoreanString(str) {
+    for (let char of str) {
+        if (char >= '가' && char <= '힣') {
+            const [initial, vowel, final] = splitKoreanChar(char);
+            if (!initialConsonants.includes(initial) || !vowels.includes(vowel) || !finalConsonants.includes(final)) {
+                return false;
+            }
+        } else if (initialConsonants.includes(char) || vowels.includes(char) || finalConsonants.includes(char)) {
+            return false;
+        } else if (char !== ' ') {
+            return false;
+        }
+    }
+    return true;
+}
+
 // 모듈 내보내기
-module.exports = { convertKoreanToEnglish, convertEnglishToKorean };
+module.exports = { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString };
