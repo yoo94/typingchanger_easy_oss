@@ -4,7 +4,8 @@
  * Copyright 2024, yoo94
  * under the MIT license.
  */
-
+const fs = require('fs');
+const path = require('path');
 // 한국어 초성, 모음, 종성 리스트 정의
 const initialConsonants = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 const vowels = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
@@ -22,9 +23,26 @@ const koreanToEnglishMap = {
 
 // 영어 문자와 한국어 문자의 매핑 정의
 var englishToKoreanMap = {};
-for (var koreanChar in koreanToEnglishMap) {
-    var englishChar = koreanToEnglishMap[koreanChar];
+for (let koreanChar in koreanToEnglishMap) {
+    let englishChar = koreanToEnglishMap[koreanChar];
     englishToKoreanMap[englishChar] = koreanChar;
+}
+
+
+// 사전 데이터 로드
+const englishDictionary = new Set();
+
+function loadDictionary() {
+    const filePath = path.join(__dirname, 'dict', 'en-US.txt');
+    const text = fs.readFileSync(filePath, 'utf-8');
+    const words = text.split('\n').map(word => word.trim().toLowerCase());
+    words.forEach(word => englishDictionary.add(word));
+}
+loadDictionary();
+
+// 올바른 영단어인지 사전 데이터로 확인하는 함수
+function isValidEnglishWord(word) {
+    return englishDictionary.has(word.toLowerCase());
 }
 
 // 한글 자모 분리 함수
@@ -155,4 +173,4 @@ function isCorrectKoreanString(str) {
 }
 
 // 모듈 내보내기
-module.exports = { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString };
+module.exports = { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isValidEnglishWord };
