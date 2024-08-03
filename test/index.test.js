@@ -1,4 +1,4 @@
-const { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isValidEnglishWord, processText } = require('../typingChanger_easy');
+const { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isValidEnglishWord, convert } = require('../typingChanger_easy');
 
 describe('typingChanger_easy.js 테스트', () => {
     beforeAll(async () => {
@@ -31,9 +31,9 @@ describe('typingChanger_easy.js 테스트', () => {
     test('isValidEnglishWord: 잘못된 영어 단어', () => {
         expect(isValidEnglishWord('facamp')).toBe(false);
     });
-    test('processText: 한글 텍스트 변환', () => {
+    test('convert: 한글 텍스트 변환', () => {
         const input = 'dkssudgktpdy';
-        const output = processText(input);
+        const output = convert(input);
         expect(output).toBe('안녕하세요');
     });
     test('convertEnglishToKorean: 모음이 연속으로 두 번 나올 때', () => {
@@ -47,9 +47,9 @@ describe('typingChanger_easy.js 테스트', () => {
         const output = convertEnglishToKorean(input);
         expect(output).toBe('낄낄빠빠');
     });
-    test('processText: 영어 텍스트 변환', () => {
+    test('convert: 영어 텍스트 변환', () => {
         const input = 'ㄻㄴㅅ';
-        const output = processText(input);
+        const output = convert(input);
         expect(output).toBe('fast');
     });
 

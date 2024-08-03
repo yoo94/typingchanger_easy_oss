@@ -178,7 +178,7 @@ function isCorrectKoreanString(str) {
 }
 
 // 변환 및 검증 함수
-function processText(text, priority = 'ko') {
+function convert(text, priority = 'ko') {
     // 한글 또는 한글 자모로 이루어진 경우
     if (/^[가-힣ㄱ-ㅎㅏ-ㅣ\s]+$/.test(text)) {
         // 올바른 한국어 문자열인지 확인
@@ -213,4 +213,4 @@ function processText(text, priority = 'ko') {
 }
 
 // 모듈 내보내기
-module.exports = { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isValidEnglishWord, processText };
+module.exports = { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isValidEnglishWord, convert };
