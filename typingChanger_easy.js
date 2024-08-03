@@ -4,9 +4,6 @@
  * Copyright 2024, yoo94
  * under the MIT license.
  */
-const fs = require('fs');
-const path = require('path');
-
 // 한국어 초성, 모음, 종성 리스트 정의
 const initialConsonants = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 const vowels = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
@@ -29,23 +26,12 @@ for (const koreanChar in koreanToEnglishMap) {
     englishToKoreanMap[englishChar] = koreanChar;
 }
 
-// 사전 데이터 로드
-const englishDictionary = new Set();
-
-function loadDictionary() {
-    const filePath = path.join(__dirname, 'dict', 'en-US.txt');
-    const text = fs.readFileSync(filePath, 'utf-8');
-    const words = text.split('\n').map(word => word.trim().toLowerCase());
-    words.forEach(word => englishDictionary.add(word));
-}
-loadDictionary();
-
-// 올바른 영단어인지 사전 데이터로 확인하는 함수
-function isValidEnglishWord(word) {
-    return englishDictionary.has(word.toLowerCase());
+// 특수문자, 숫자 제외
+function removeSpecialCharactersAndNumbers(str) {
+    return str.replace(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣\s]/g, '');
 }
 
-// 한글 자모 분리 함수
+// 한글자 -> 자모음 분리
 function splitKoreanChar(koreanChar) {
     // baseCode: 유니코드 값에서 한글 시작 코드(0xAC00)를 뺀 값
     const baseCode = koreanChar.charCodeAt(0) - 0xAC00;
@@ -80,9 +66,9 @@ function splitKoreanString(koreanString) {
     return result;
 }
 
-// 한글 -> 영어 변환 함수
+// 한글 -> 영어
 function convertKoreanToEnglish(text) {
-    // 한글 문자열을 자모 단위로 분리
+    text = removeSpecialCharactersAndNumbers(text);
     const splitText = splitKoreanString(text);
     // 각 자모를 영어로 변환하거나 그대로 반환하여 문자열로 결합
     return splitText.map(function(char) {
@@ -90,8 +76,9 @@ function convertKoreanToEnglish(text) {
     }).join('');
 }
 
-// 영어 -> 한글 변환 함수
+// 영어 -> 한글
 function convertEnglishToKorean(text) {
+    text = removeSpecialCharactersAndNumbers(text);
     let result;
 
     // 알파벳들을 한글 자모로 변환
@@ -114,7 +101,6 @@ function convertEnglishToKorean(text) {
         .replace(/ㅜㅣ/g, 'ㅟ')
         .replace(/ㅡㅣ/g, 'ㅢ');
 
-    // 결과를 joinKoreanString으로 보냄
     result = joinKoreanString(buffer.split(''));
 
     return result;
@@ -161,6 +147,7 @@ function joinKoreanString(chars) {
     return result;
 }
 
+// 올바른 한글 자모음인지
 function isCorrectKoreanString(str) {
     for (const char of str) {
         if (char >= '가' && char <= '힣') {
@@ -177,40 +164,34 @@ function isCorrectKoreanString(str) {
     return true;
 }
 
-// 변환 및 검증 함수
-function convert(text, priority = 'ko') {
-    // 한글 또는 한글 자모로 이루어진 경우
+// 알파벳으로만 이루어 졌는지
+function isCorrectEnglishWord(str) {
+    return /^[a-zA-Z\s]+$/.test(str);
+}
+
+// 올바른 한글,영어 검증 후 return
+function convertWithValidation(text, priority = 'ko') {
+    text = removeSpecialCharactersAndNumbers(text);
     if (/^[가-힣ㄱ-ㅎㅏ-ㅣ\s]+$/.test(text)) {
-        // 올바른 한국어 문자열인지 확인
-        if (isCorrectKoreanString(text)) {
-            return text;
-        }
-        const convertedText = convertKoreanToEnglish(text);
-        // 유효한 영어 단어인지 확인
-        if (isValidEnglishWord(convertedText)) {
-            return convertedText;
-        }
-        // 우선순위에 따라 반환
-        return priority === 'ko' ? text : convertedText;
+        // 올바른 한글이면 영어로 바꿀 필요 x
+        const isKorean = isCorrectKoreanString(text);
+        if (isKorean) return text;
+        const convertedEng = convertKoreanToEnglish(text);
+        const isEnglish = isCorrectEnglishWord(convertedEng);
+        if (isEnglish) return convertedEng;
     }
 
-    // 영어 알파벳으로만 이루어진 경우
     if (/^[a-zA-Z\s]+$/.test(text)) {
-        // 유효한 영어 단어인지 확인
-        if (isValidEnglishWord(text)) {
-            return text;
+        const convertedKor = convertEnglishToKorean(text);
+        const isKorean = isCorrectKoreanString(convertedKor);
+        const isEnglish = isCorrectEnglishWord(text);
+        if (isKorean && isEnglish) {
+            return priority === 'ko' ? convertedKor : text;
         }
-        const convertedText = convertEnglishToKorean(text);
-        // 올바른 한국어 문자열인지 확인
-        if (isCorrectKoreanString(convertedText)) {
-            return convertedText;
-        }
-        // 우선순위에 따라 반환
-        return priority === 'ko' ? convertedText : text;
+        return isKorean ? convertedKor : text;
     }
-    // 위의 조건에 해당하지 않는 경우 원본 텍스트 반환
+
     return text;
 }
 
-// 모듈 내보내기
-module.exports = { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isValidEnglishWord, convert };
+module.exports = { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isCorrectEnglishWord, convertWithValidation };
