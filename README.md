@@ -14,10 +14,19 @@ npm install typingchanger_easy
 ```
 
 ## 사용 방법
+
+commonJS
 ```js
 const typingChanger = require('typingchanger_easy');
 
-const convertedText = typingChanger.convert('dkssudgktpdy'); // '안녕하세요'로 변환
+const convertedText = typingChanger.processText('dkssudgktpdy'); // '안녕하세요'로 변환
+console.log(convertedText);
+```
+module
+```js
+import { processText } from 'typingchanger_easy';
+
+const convertedText = processText('dkssudgktpdy'); // '안녕하세요'로 변환
 console.log(convertedText);
 ```
 
