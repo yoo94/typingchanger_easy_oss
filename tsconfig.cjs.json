@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/cjs",
+    "module": "commonjs",
+    "target": "es2022",
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./dist/cjs",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "types": ["@types/node"]
+  },
+  "include": ["src/**/*"]
+}

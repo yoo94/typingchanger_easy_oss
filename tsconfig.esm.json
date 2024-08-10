@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/esm",
+    "module": "esnext",
+    "target": "es2022",
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./dist/esm",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "types": ["@types/node"]
+  },
+  "include": ["src/**/*"]
+}
