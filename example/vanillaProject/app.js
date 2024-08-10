@@ -1,4 +1,4 @@
-import { convertKoreanToEnglish, convertEnglishToKorean, convertWithValidation } from './node_modules/typingchanger_easy/dist/esm/index.js';
+import { convertKoreanToEnglish, convertEnglishToKorean, convertWithValidation } from 'typingchanger_easy';
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('convertKorToEng').addEventListener('click', () => {

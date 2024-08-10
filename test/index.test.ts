@@ -1,4 +1,4 @@
-import { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isCorrectEnglishWord, convertWithValidation } from '../src/index';
+const { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isCorrectEnglishWord, convertWithValidation } = require('../src/index');
 
 describe('typingChanger_easy.js 테스트', () => {
     test('isCorrectKoreanString: 올바른 한글 문자열', () => {

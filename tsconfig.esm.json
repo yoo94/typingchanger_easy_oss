@@ -9,6 +9,14 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "types": ["@types/node"],
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true,
+        "useExtensions": true
+      }
+    ]
+
   },
   "include": ["src/**/*"]
 }

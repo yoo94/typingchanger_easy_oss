@@ -13,10 +13,10 @@ typingchanger_easy는 한영 키를 잊고 타이핑했을 때 한글을 영어�
 
 ```sh
 # with npm
-npm i typewriter-effect
+npm i typewriter-easy
 
 # with yarn
-yarn add typewriter-effect
+yarn add typewriter-easy
 ```
 
 ## 사용 방법
