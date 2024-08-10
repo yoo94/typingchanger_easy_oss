@@ -1,0 +1,6 @@
+node_modules/
+test/
+example/
+babel.config.js
+jest.config.js
+src/

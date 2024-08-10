@@ -8,7 +8,7 @@
     "declarationDir": "./dist/esm",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "types": ["@types/node"]
+    "types": ["@types/node"],
   },
   "include": ["src/**/*"]
 }

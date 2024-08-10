@@ -37,11 +37,13 @@
     "@types/jest": "^27.5.2",
     "jest": "^27.2.0",
     "ts-jest": "^27.0.0",
-    "typescript": "^4.0.0"
+    "typescript": "^4.0.0",
+    "tsx": "^4.17.0"
   },
   "files": [
     "dist",
-    "src"
+    "README.md",
+    "LICENSE"
   ],
   "exclude": [
     "node_modules",
