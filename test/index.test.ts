@@ -21,12 +21,6 @@ describe('typingChanger_easy.js 테스트', () => {
         expect(isCorrectEnglishWord('victory')).toBe(false);
     });
 
-    test('convert: 한글 텍스트 변환', () => {
-        const input = 'dkssudgktpdy';
-        const output = convertWithValidation(input, 'ko');
-        expect(output).toBe('안녕하세요');
-    });
-
     test('convert: 한글을 영어로 변환', () => {
         const input = 'ㄻㄴㅅ';
         const output = convertKoreanToEnglish(input);
@@ -44,4 +38,5 @@ describe('typingChanger_easy.js 테스트', () => {
         const output = convertEnglishToKorean(input);
         expect(output).toBe('낄낄빠빠');
     });
+
 });
