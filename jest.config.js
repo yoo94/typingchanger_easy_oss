@@ -1,7 +1,5 @@
 module.exports = {
-    transform: {
-        '^.+\\.jsx?$': 'babel-jest',
-    },
-    moduleFileExtensions: ['js'],
+    preset: 'ts-jest',
     testEnvironment: 'node',
+    testMatch: ['**/?(*.)+(spec|test).[tj]s?(x)'],
 };
