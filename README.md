@@ -33,7 +33,7 @@ console.log(koreanToEnglish); // 'dkssudgktpdy'
 const englishToKorean = convertEnglishToKorean('dkssudgktpdy');
 console.log(englishToKorean); // '안녕하세요'
 
-// 자동 감지 후 변환
+// 둘다 완벽할때 우선순위 선택
 const autoDetected = convertWithValidation('dkssudgktpdy');
 console.log(autoDetected); // '안녕하세요'
 
@@ -50,7 +50,7 @@ console.log(koreanToEnglish); // 'dkssudgktpdy'
 const englishToKorean = convertEnglishToKorean('dkssudgktpdy');
 console.log(englishToKorean); // '안녕하세요'
 
-// 자동 감지 후 변환
+// 둘다 완벽할때 우선순위 선택
 const autoDetected = convertWithValidation('victory','ko');
 console.log(autoDetected); // '퍛새교'
 const autoDetected = convertWithValidation('victory','en');
