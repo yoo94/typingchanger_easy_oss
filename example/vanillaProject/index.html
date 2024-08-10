@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Typing Changer Example</title>
+</head>
+<body>
+<h1>Typing Changer Example</h1>
+<div class="form-group">
+    <h2>한글 -> 영어 변환</h2>
+    <textarea id="koreanToEnglishInput" placeholder="Type Korean here..."></textarea>
+    <button id="convertKorToEng">Convert</button>
+    <p>Output: <span id="koreanToEnglishOutput"></span></p>
+</div>
+<div class="form-group">
+    <h2>영어 -> 한글 변환</h2>
+    <textarea id="englishToKoreanInput" placeholder="Type English here..."></textarea>
+    <button id="convertEngToKor">Convert</button>
+    <p>Output: <span id="englishToKoreanOutput"></span></p>
+</div>
+<div class="form-group">
+    <h2>자동 감지 및 변환</h2>
+    <textarea id="autoDetectInput" placeholder="Type here..."></textarea>
+    <button id="autoDetectAndConvert">Convert</button>
+    <p>Output: <span id="autoDetectOutput"></span></p>
+</div>
+<script type="module" src="app.js" defer></script>
+</body>
+</html>
