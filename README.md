@@ -51,9 +51,10 @@ const englishToKorean = convertEnglishToKorean('dkssudgktpdy');
 console.log(englishToKorean); // '안녕하세요'
 
 // 자동 감지 후 변환
-const autoDetected = convertWithValidation('dkssudgktpdy');
-console.log(autoDetected); // '안녕하세요'
-
+const autoDetected = convertWithValidation('victory','ko');
+console.log(autoDetected); // '퍛새교'
+const autoDetected = convertWithValidation('victory','en');
+console.log(autoDetected); // 'victory'
 ```
 <h2>Methods</h2>
 <p>모든 메서드는 독립적으로 사용할 수 있으며, 텍스트 변환 및 검증을 수행합니다.</p>
