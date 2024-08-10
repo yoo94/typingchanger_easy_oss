@@ -21,7 +21,7 @@ yarn add typingchanger_easy
 
 ## 사용 방법
 
-commonJS
+### commonJS
 ```js
 const { convertKoreanToEnglish, convertEnglishToKorean, convertWithValidation } = require('typingchanger_easy');
 
@@ -35,7 +35,7 @@ console.log(englishToKorean); // '안녕하세요'
 
 ```
 
-module
+### module
 ```js
 import { convertKoreanToEnglish, convertEnglishToKorean, optionProvider } from 'typingchanger_easy';
 
@@ -65,13 +65,14 @@ document.getElementById('search').addEventListener('input', (event) => {
 });
 ```
 
-<h3>convertKoreanToEnglish , convertEnglishToKorean 예제 이미지</h3>
+### convertKoreanToEnglish , convertEnglishToKorean 예제 이미지
+
 ![img.png](example/img.png)
 
-<h3>optionProvider 예제 이미지</h3>
+### optionProvider 예제 이미지
 ![img_1.png](example/img_1.png)
 
-<h3>optionProvider 예제 이미지</h3>
+### optionProvider 예제 이미지
 ![img_2.png](example/img_2.png)
 
 ![img.png3](example/img3.png)
