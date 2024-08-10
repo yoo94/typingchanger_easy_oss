@@ -2,6 +2,7 @@ import { initialConsonants, vowels, finalConsonants } from './constants';
 
 // 특수문자, 숫자 제외
 function removeSpecialCharactersAndNumbers(str: string): string {
+    // return str.replace(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣\s]/g, '');
     return str.replace(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣\s]/g, '');
 }
 
@@ -29,26 +30,28 @@ function splitKoreanString(koreanString: string): string[] {
 }
 
 // 자모 결합 함수
-function joinKoreanString(chars: string[]): string {
+function joinKoreanString(chars: (string | undefined)[]): string {
     let result = '';
     let i = 0;
 
     while (i < chars.length) {
-        if (chars[i] === ' ') {
+        if (chars[i] === ' ' || chars[i] === undefined) {
             result += ' ';
             i++;
             continue;
         }
 
-        const initial = chars[i++];
-        const vowel = chars[i++];
+        const initial = chars[i++]!;
+        const vowel = chars[i++]!;
         let final = '';
 
-        const hasFinalConsonant = finalConsonants.includes(chars[i]);
-        const hasNextVowel = i + 1 < chars.length && vowels.includes(chars[i + 1]);
+        if (chars[i] !== undefined) {
+            const hasFinalConsonant = finalConsonants.includes(chars[i]);
+            const hasNextVowel = i + 1 < chars.length && vowels.includes(chars[i + 1]);
 
-        if (i < chars.length && hasFinalConsonant && !hasNextVowel) {
-            final = chars[i++];
+            if (i < chars.length && hasFinalConsonant && !hasNextVowel) {
+                final = chars[i++]!;
+            }
         }
 
         const initialIndex = initialConsonants.indexOf(initial);
@@ -63,7 +66,7 @@ function joinKoreanString(chars: string[]): string {
         }
     }
 
-    return result;
+    return result.replace(/undefined/g, '');
 }
 
 export { removeSpecialCharactersAndNumbers, splitKoreanString, joinKoreanString, splitKoreanChar };
