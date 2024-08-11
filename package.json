@@ -1,7 +1,7 @@
 {
   "name": "typingchanger_easy",
-  "version": "1.0.10",
-  "description": "한영키로 언어를 안 바꾸고 타이핑했을 때 한글=>영어, 영어=>한글 자동 변환 모듈",
+  "version": "1.0.12",
+  "description": "한영키로 언어를 안 바꾸고 타이핑했을 때 한글=>영어, 영어=>한글 변환 모듈",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",

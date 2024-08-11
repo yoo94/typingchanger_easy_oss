@@ -67,15 +67,15 @@ document.getElementById('search').addEventListener('input', (event) => {
 
 ### convertKoreanToEnglish , convertEnglishToKorean 예제 이미지
 
-![img.png](example/img.png)
+![img.png](staticImg/img.png)
 
 ### optionProvider 예제 이미지
-![img_1.png](example/img_1.png)
+![img_1.png](staticImg/img_1.png)
 
 ### optionProvider 예제 이미지
-![img_2.png](example/img_2.png)
+![img_2.png](staticImg/img_2.png)
 
-![img.png3](example/img3.png)
+![img.png3](staticImg/img3.png)
 
 
 <h2>Methods</h2>
@@ -132,5 +132,5 @@ document.getElementById('search').addEventListener('input', (event) => {
 * 커스텀 style은 일반 css 선택자와 동일하나 탭으로 선택한 옵션의 백그라운드 컬러는
   activeItemBackgroundColor로 조작 가능합니다.
 
-라이선스
+# 라이선스
 MIT 라이선스
