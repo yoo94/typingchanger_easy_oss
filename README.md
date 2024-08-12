@@ -1,4 +1,6 @@
 # typingchanger_easy
+##npm 주소
+https://www.npmjs.com/package/typingchanger_easy
 
 typingchanger_easy는 한영 키를 잊고 타이핑했을 때 한글을 영어로, 영어를 한글로 자동 변환해주는 모듈입니다.
 2벌식 키보드 배열을 기준으로 작동합니다.
