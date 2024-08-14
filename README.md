@@ -1,4 +1,5 @@
 # typingchanger_easy
+[![Socket Badge](https://socket.dev/api/badge/npm/package/typingchanger_easy/undefined)](https://socket.dev/npm/package/typingchanger_easy/overview/1.0.14
 ## npm 주소
 https://www.npmjs.com/package/typingchanger_easy
 
