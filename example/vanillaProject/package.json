@@ -3,13 +3,6 @@
   "version": "1.0.0",
   "description": "Typing Changer Example Project",
   "scripts": {
-    "start": "http-server . -p 8080"
-  },
-  "devDependencies": {
-    "http-server": "^14.1.1",
-    "vite": "^5.4.0"
-  },
-  "dependencies": {
-    "typingchanger_easy": "^1.0.10"
+    "start": "python3 -m http.server 8080 --directory ../.."
   }
 }

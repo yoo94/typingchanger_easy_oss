@@ -1,33 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>Typing Changer Example</title>
+    <title>typingchanger_easy Demo</title>
 </head>
 <body>
-<h2>Typing Changer Example</h2>
-<div class="form-group">
-    <h4>한글 -> 영어 변환 convertKoreanToEnglish</h4>
-    <textarea id="koreanToEnglishInput" placeholder="Type Korean here..."></textarea>
-    <button id="convertKorToEng">Convert</button>
-    <p>Output: <span id="koreanToEnglishOutput"></span></p>
-</div>
-<div class="form-group">
-    <h4>영어 -> 한글 변환 convertEnglishToKorean</h4>
-    <textarea id="englishToKoreanInput" placeholder="Type English here..."></textarea>
-    <button id="convertEngToKor">Convert</button>
-    <p>Output: <span id="englishToKoreanOutput"></span></p>
-</div>
-<div class="form-group">
-    <h4>선택옵션 optionProvider(event, 'id')</h4>
-    <input type="text" id="search"/>
-</div>
-<div class="form-group">
-    <h4>선택옵션 optionProvider(event, 'id', {style option 객체})</h4>
-    <textarea id="searchArea"></textarea>
-</div>
-<script type="module" src="app.js" defer></script>
+    <main class="app-shell">
+        <section class="workspace" aria-label="typingchanger_easy demo">
+            <div class="intro">
+                <p class="eyebrow">2벌식 한영 오타 변환 모듈</p>
+                <h1>typingchanger_easy</h1>
+                <p class="summary">문장 변환과 자동추천 입력을 한 화면에서 바로 테스트하세요.</p>
+            </div>
+
+            <div class="demo-grid">
+                <section class="panel convert-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-label">Convert</span>
+                            <h2>문장 변환</h2>
+                        </div>
+                        <div class="mode-toggle" aria-label="변환 방향">
+                            <button class="mode-button active" data-mode="koToEn" type="button">한글 to 영어</button>
+                            <button class="mode-button" data-mode="enToKo" type="button">영어 to 한글</button>
+                        </div>
+                    </div>
+
+                    <label class="field-label" for="sourceInput">입력</label>
+                    <textarea id="sourceInput" spellcheck="false">안녕하세요 typingchanger_easy</textarea>
+
+                    <div class="sample-row" aria-label="문장 변환 샘플">
+                        <button class="sample-button" type="button" data-convert-sample="koToEn">한글 샘플</button>
+                        <button class="sample-button" type="button" data-convert-sample="enToKo">영문 샘플</button>
+                        <button class="sample-button secondary" id="clearInput" type="button">지우기</button>
+                    </div>
+
+                    <div class="result-box">
+                        <div class="result-meta">
+                            <span id="resultDirection">convertKoreanToEnglish</span>
+                            <button class="copy-button" id="copyResult" type="button">Copy</button>
+                        </div>
+                        <output id="convertedOutput" for="sourceInput"></output>
+                    </div>
+                </section>
+
+                <section class="panel assist-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="panel-label">Option Provider</span>
+                            <h2>자동 추천 입력</h2>
+                        </div>
+                    </div>
+
+                    <div class="input-grid">
+                        <div class="input-block">
+                            <label class="field-label" for="smartSearch">검색창</label>
+                            <input id="smartSearch" type="text" autocomplete="off" placeholder="dkssudgktpdy 또는 안녕하세요">
+                        </div>
+
+                        <div class="input-block">
+                            <label class="field-label" for="smartMemo">긴 문장 입력</label>
+                            <textarea id="smartMemo" spellcheck="false" placeholder="gksdudzl를 입력해 보세요"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="hint-row">
+                        <span>Tab/화살표로 이동</span>
+                        <span>Enter로 선택</span>
+                        <span>Esc로 닫기</span>
+                        <span>Click으로 바로 적용</span>
+                    </div>
+
+                    <div class="sample-row" aria-label="자동추천 샘플 입력">
+                        <button class="sample-button" type="button" data-target="smartSearch" data-value="dkssudgktpdy">dkssudgktpdy</button>
+                        <button class="sample-button" type="button" data-target="smartSearch" data-value="안녕하세요">안녕하세요</button>
+                        <button class="sample-button" type="button" data-target="smartMemo" data-value="gksdudzl qksrkqtmqslek.">gksdudzl qksrkqtmqslek.</button>
+                    </div>
+
+                    <div class="keyboard-card" aria-label="2벌식 키보드 예시">
+                        <div class="keyboard-row">
+                            <span>ㅂ q</span><span>ㅈ w</span><span>ㄷ e</span><span>ㄱ r</span><span>ㅅ t</span>
+                        </div>
+                        <div class="keyboard-row">
+                            <span>ㅁ a</span><span>ㄴ s</span><span>ㅇ d</span><span>ㄹ f</span><span>ㅎ g</span>
+                        </div>
+                        <div class="keyboard-row">
+                            <span>ㅋ z</span><span>ㅌ x</span><span>ㅊ c</span><span>ㅍ v</span><span>ㅠ b</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
 </body>
 </html>

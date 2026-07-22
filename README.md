@@ -6,10 +6,11 @@ typingchanger_easy는 한영 키를 잊고 타이핑했을 때 한글을 영어�
 2벌식 키보드 배열을 기준으로 작동합니다.
 
 주요 기능
-- 한글 ⇄ 영어 변환: 잘못된 키보드 입력을 감지하여 한글을 영어로, 영어를 한글로 자동 변환합니다.
-- 실시간으로 한글 ⇄ 영어 변환하고 그에대한 옵션을 제공합니다.
+- 한글 ⇄ 영어 변환: 한영 키를 바꾸지 않고 입력한 텍스트를 2벌식 키보드 배열 기준으로 변환합니다.
+- 문장부호와 숫자 보존: 영어 입력을 한글로 바꿀 때 `!`, `2026` 같은 주변 문자를 유지합니다.
+- 추천 UI 제공: 입력값 기준으로 한글/영어 변환 후보를 보여주고 키보드 또는 마우스로 선택할 수 있습니다.
   <br>*esm에서만 제공합니다*
-  <br>(옵션 선택은 click 또는 tab 을 이용하여 선택 가능합니다.)
+  <br>(옵션 선택은 click, tab, 방향키, enter, esc를 이용할 수 있습니다.)
 
 ## 설치 방법
 
@@ -63,21 +64,47 @@ document.getElementById('search').addEventListener('input', (event) => {
       backgroundColor: '#f0f0f0',
       border: '1px solid #ccc',
       activeItemBackgroundColor: '#ffcc00', // 활성화된 항목의 배경색을 노란색으로 설정
+      itemHoverBackgroundColor: '#fff3bf',
+      itemPadding: '10px 12px',
     });
 });
 ```
 
-### convertKoreanToEnglish , convertEnglishToKorean 예제 이미지
+## 예제 실행
 
-![img.png](staticImg/img.png)
+```sh
+npm run build
+cd example/vanillaProject
+npm start
+```
 
-### optionProvider 예제 이미지
-![img_1.png](staticImg/img_1.png)
+브라우저에서 `http://127.0.0.1:8080/example/vanillaProject/`로 확인할 수 있습니다.
 
-### optionProvider 예제 이미지
-![img_2.png](staticImg/img_2.png)
+## 예제 이미지
 
-![img.png3](staticImg/img3.png)
+### `convertKoreanToEnglish(text)` / `convertEnglishToKorean(text)`
+
+한글을 영어 키 입력값으로 바꾸는 `convertKoreanToEnglish`와, 영어 키 입력값을 한글로 조합하는 `convertEnglishToKorean` 사용 예시입니다.
+
+![convertKoreanToEnglish, convertEnglishToKorean 예제](staticImg/img.png)
+
+### `optionProvider(event, inputId)`
+
+기본 스타일로 입력값에 대한 변환 추천 목록을 보여주는 예시입니다.
+
+![optionProvider 기본 스타일 예제](staticImg/img_1.png)
+
+### `optionProvider(event, inputId, customStyles)`
+
+세 번째 인자로 CSS 스타일 객체를 전달해 추천 목록의 배경색, 글자색, 테두리 등을 바꾼 예시입니다.
+
+![optionProvider customStyles 예제](staticImg/img_2.png)
+
+### `optionProvider(event, inputId, { activeItemBackgroundColor })`
+
+Tab 또는 방향키로 추천 항목을 이동할 때 선택된 항목의 배경색을 `activeItemBackgroundColor`로 커스터마이징한 예시입니다.
+
+![optionProvider activeItemBackgroundColor 예제](staticImg/img_3.png)
 
 
 <h2>Methods</h2>
@@ -126,13 +153,13 @@ document.getElementById('search').addEventListener('input', (event) => {
       <td>customStyles</td>
       <td>DropdownStyles</td>
       <td>기본 스타일</td>
-      <td><code>optionProvider</code> 함수에서 추천 목록의 스타일을 사용자 정의할 수 있습니다. 예를 들어 글꼴, 크기, 색상 등을 설정할 수 있습니다.</td>
+      <td><code>optionProvider</code> 함수에서 추천 목록의 스타일을 사용자 정의할 수 있습니다. 예를 들어 글꼴, 크기, 색상, 활성 항목 배경색, hover 배경색, 항목 padding 등을 설정할 수 있습니다.</td>
     </tr>
   </tbody>
 </table>
 
 * 커스텀 style은 일반 css 선택자와 동일하나 탭으로 선택한 옵션의 백그라운드 컬러는
-  activeItemBackgroundColor로 조작 가능합니다.
+  activeItemBackgroundColor로 조작 가능합니다. 항목 hover는 itemHoverBackgroundColor, 항목 padding은 itemPadding으로 조작할 수 있습니다.
 
 # 라이선스
 MIT 라이선스

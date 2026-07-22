@@ -1,42 +1,42 @@
-const { convertKoreanToEnglish, convertEnglishToKorean, isCorrectKoreanString, isCorrectEnglishWord, convertWithValidation } = require('../src/index');
+const {
+    convertKoreanToEnglish,
+    convertEnglishToKorean,
+    isCorrectKoreanString,
+    isCorrectEnglishWord,
+} = require('../src/index');
 
-describe('typingChanger_easy.js 테스트', () => {
-    test('isCorrectKoreanString: 올바른 한글 문자열', () => {
+describe('typingchanger_easy', () => {
+    test('isCorrectKoreanString: 완성형 한글 문자열을 올바르게 판단한다', () => {
         expect(isCorrectKoreanString('안녕하세요')).toBe(true);
     });
 
-    test('isCorrectKoreanString: 잘못된 한글 문자열', () => {
+    test('isCorrectKoreanString: 숫자나 분리 자모가 섞이면 올바르지 않게 판단한다', () => {
         expect(isCorrectKoreanString('안1녕')).toBe(false);
-    });
-
-    test('isCorrectKoreanString: 잘못된 한글 문자열2', () => {
         expect(isCorrectKoreanString('ㅇㅏㄴ하')).toBe(false);
     });
 
-    test('isCorrectEnglishWord: 올바른 영어 단어', () => {
-        expect(isCorrectEnglishWord('campus')).toBe(true);
+    test('isCorrectEnglishWord: 알파벳과 공백만 허용한다', () => {
+        expect(isCorrectEnglishWord('campus note')).toBe(true);
+        expect(isCorrectEnglishWord('campus!')).toBe(false);
     });
 
-    test('isCorrectEnglishWord: 잘못된 영어 단어', () => {
-        expect(isCorrectEnglishWord('victory')).toBe(false);
+    test('convertKoreanToEnglish: 완성형 한글과 겹받침을 영어 키 입력으로 변환한다', () => {
+        expect(convertKoreanToEnglish('안녕하세요')).toBe('dkssudgktpdy');
+        expect(convertKoreanToEnglish('ㄻㄴㅅ')).toBe('fast');
     });
 
-    test('convert: 한글을 영어로 변환', () => {
-        const input = 'ㄻㄴㅅ';
-        const output = convertKoreanToEnglish(input);
-        expect(output).toBe('fast');
+    test('convertEnglishToKorean: 영어 키 입력을 완성형 한글로 조합한다', () => {
+        expect(convertEnglishToKorean('dkssudgktpdy')).toBe('안녕하세요');
+        expect(convertEnglishToKorean('RlfRlfQkQk')).toBe('낄낄빠빠');
     });
 
-    test('convertEnglishToKorean: 모음이 연속으로 두 번 나올 때', () => {
-        const input = 'dho';
-        const output = convertEnglishToKorean(input);
-        expect(output).toBe('왜');
+    test('convertEnglishToKorean: 복합 모음과 겹받침을 처리한다', () => {
+        expect(convertEnglishToKorean('dho')).toBe('왜');
+        expect(convertEnglishToKorean('djqtj')).toBe('업서');
+        expect(convertEnglishToKorean('djqtq')).toBe('없ㅂ');
     });
 
-    test('convertEnglishToKorean: 자음이 연속으로 두 번 나올 때', () => {
-        const input = 'RlfRlfQkQk';
-        const output = convertEnglishToKorean(input);
-        expect(output).toBe('낄낄빠빠');
+    test('convertEnglishToKorean: 문장부호와 숫자를 보존한다', () => {
+        expect(convertEnglishToKorean('dkssudgktpdy! 2026')).toBe('안녕하세요! 2026');
     });
-
 });

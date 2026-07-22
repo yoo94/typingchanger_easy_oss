@@ -1,8 +1,7 @@
 const initialConsonants = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
 const vowels = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
 const finalConsonants = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
-
-const koreanToEnglishMap: { [key: string]: string } = {
+const koreanToEnglishMap = {
     'ㄱ': 'r', 'ㄲ': 'R', 'ㄴ': 's', 'ㄷ': 'e', 'ㄸ': 'E', 'ㄹ': 'f', 'ㅁ': 'a', 'ㅂ': 'q', 'ㅃ': 'Q', 'ㅅ': 't', 'ㅆ': 'T',
     'ㅇ': 'd', 'ㅈ': 'w', 'ㅉ': 'W', 'ㅊ': 'c', 'ㅋ': 'z', 'ㅌ': 'x', 'ㅍ': 'v', 'ㅎ': 'g',
     'ㅏ': 'k', 'ㅐ': 'o', 'ㅑ': 'i', 'ㅒ': 'O', 'ㅓ': 'j', 'ㅔ': 'p', 'ㅕ': 'u', 'ㅖ': 'P', 'ㅗ': 'h', 'ㅘ': 'hk', 'ㅙ': 'ho', 'ㅚ': 'hl',
@@ -10,14 +9,12 @@ const koreanToEnglishMap: { [key: string]: string } = {
     'ㄳ': 'rt', 'ㄵ': 'sw', 'ㄶ': 'sg', 'ㄺ': 'fr', 'ㄻ': 'fa', 'ㄼ': 'fq', 'ㄽ': 'ft',
     'ㄾ': 'fx', 'ㄿ': 'fv', 'ㅀ': 'fg', 'ㅄ': 'qt'
 };
-
-const englishToKoreanMap: { [key: string]: string } = {};
+const englishToKoreanMap = {};
 for (const koreanChar in koreanToEnglishMap) {
     const englishChar = koreanToEnglishMap[koreanChar];
     englishToKoreanMap[englishChar] = koreanChar;
 }
-
-const compoundVowels: { [key: string]: string } = {
+const compoundVowels = {
     'ㅗㅏ': 'ㅘ',
     'ㅗㅐ': 'ㅙ',
     'ㅗㅣ': 'ㅚ',
@@ -26,8 +23,7 @@ const compoundVowels: { [key: string]: string } = {
     'ㅜㅣ': 'ㅟ',
     'ㅡㅣ': 'ㅢ',
 };
-
-const compoundFinalConsonants: { [key: string]: string } = {
+const compoundFinalConsonants = {
     'ㄱㅅ': 'ㄳ',
     'ㄴㅈ': 'ㄵ',
     'ㄴㅎ': 'ㄶ',
@@ -40,29 +36,16 @@ const compoundFinalConsonants: { [key: string]: string } = {
     'ㄹㅎ': 'ㅀ',
     'ㅂㅅ': 'ㅄ',
 };
-
-const decomposedFinalConsonants: { [key: string]: [string, string] } = {};
+const decomposedFinalConsonants = {};
 for (const key in compoundFinalConsonants) {
     const compound = compoundFinalConsonants[key];
     decomposedFinalConsonants[compound] = [key[0], key[1]];
 }
-
-const singleEnglishToKoreanMap: { [key: string]: string } = {};
+const singleEnglishToKoreanMap = {};
 for (const koreanChar in koreanToEnglishMap) {
     const englishChar = koreanToEnglishMap[koreanChar];
     if (englishChar.length === 1) {
         singleEnglishToKoreanMap[englishChar] = koreanChar;
     }
 }
-
-export {
-    initialConsonants,
-    vowels,
-    finalConsonants,
-    koreanToEnglishMap,
-    englishToKoreanMap,
-    compoundVowels,
-    compoundFinalConsonants,
-    decomposedFinalConsonants,
-    singleEnglishToKoreanMap,
-};
+export { initialConsonants, vowels, finalConsonants, koreanToEnglishMap, englishToKoreanMap, compoundVowels, compoundFinalConsonants, decomposedFinalConsonants, singleEnglishToKoreanMap, };
