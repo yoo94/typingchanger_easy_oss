@@ -86,25 +86,25 @@ npm start
 
 한글을 영어 키 입력값으로 바꾸는 `convertKoreanToEnglish`와, 영어 키 입력값을 한글로 조합하는 `convertEnglishToKorean` 사용 예시입니다.
 
-![convertKoreanToEnglish, convertEnglishToKorean 예제](staticImg/img.png)
+![convertKoreanToEnglish, convertEnglishToKorean 예제](https://github.com/yoo94/typingchanger_easy_oss/blob/main/img.png)
 
 ### `optionProvider(event, inputId)`
 
 기본 스타일로 입력값에 대한 변환 추천 목록을 보여주는 예시입니다.
 
-![optionProvider 기본 스타일 예제](staticImg/img_1.png)
+![optionProvider 기본 스타일 예제](https://github.com/yoo94/typingchanger_easy_oss/blob/main/staticImg/img_1.png)
 
 ### `optionProvider(event, inputId, customStyles)`
 
 세 번째 인자로 CSS 스타일 객체를 전달해 추천 목록의 배경색, 글자색, 테두리 등을 바꾼 예시입니다.
 
-![optionProvider customStyles 예제](staticImg/img_2.png)
+![optionProvider customStyles 예제](https://github.com/yoo94/typingchanger_easy_oss/blob/main/staticImg/img_2.png)
 
 ### `optionProvider(event, inputId, { activeItemBackgroundColor })`
 
 Tab 또는 방향키로 추천 항목을 이동할 때 선택된 항목의 배경색을 `activeItemBackgroundColor`로 커스터마이징한 예시입니다.
 
-![optionProvider activeItemBackgroundColor 예제](staticImg/img_3.png)
+![optionProvider activeItemBackgroundColor 예제](https://github.com/yoo94/typingchanger_easy_oss/blob/main/staticImg/img_3.png)
 
 
 <h2>Methods</h2>
